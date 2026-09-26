@@ -21,19 +21,22 @@ router.post("/login", (req: Request, res: Response) => {
     expiresIn: "24h",
   });
 
-  res.cookie("admin_token", token, {
+   res.cookie("admin_token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    secure: true,
+    sameSite: "none",
     maxAge: 24 * 60 * 60 * 1000,
   });
-
   return res.json({ success: true });
 });
 
 // POST /api/admin/logout
 router.post("/logout", (_req: Request, res: Response) => {
-  res.clearCookie("admin_token");
+  res.clearCookie("admin_token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
   return res.json({ success: true });
 });
 
