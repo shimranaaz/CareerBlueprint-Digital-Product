@@ -33,12 +33,14 @@ function AdminDashboard() {
   const [summary, setSummary] = useState<Summary | null>(null);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
-  const [loading, setLoading] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false);
   const [resendingId, setResendingId] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Order | null>(null);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-  const fetchOrders = useCallback(async () => {
+
+   const fetchOrders = useCallback(async () => {
     setLoading(true);
     try {
       const { data } = await api.get("/api/admin/orders", {
@@ -56,9 +58,18 @@ function AdminDashboard() {
   }, [search, status, navigate]);
 
   useEffect(() => {
-    fetchOrders();
-  }, [fetchOrders]);
-
+    const checkAuth = async () => {
+      try {
+        await api.get("/api/admin/me");
+        setAuthChecked(true);
+        fetchOrders();
+      } catch {
+        navigate("/admin/login");
+      }
+    };
+    checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const handleResend = async (orderId: string) => {
     setResendingId(orderId);
     try {
@@ -93,6 +104,14 @@ function AdminDashboard() {
     failed: "bg-red-50 text-[#D65C4A]",
     created: "bg-amber-50 text-amber-700",
   };
+
+  if (!authChecked) {
+    return (
+      <div className="min-h-screen bg-[#F5F8F8] flex items-center justify-center">
+        <p className="text-[#5C6B6B] text-sm">Checking access...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F5F8F8]">
