@@ -1,10 +1,7 @@
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_API_URL;
-
-if (!baseURL) {
-  console.error("VITE_API_URL is not set. API calls will go to the wrong server.");
-}
+const baseURL =
+  import.meta.env.VITE_API_URL || "https://careerblueprint-digital-product.onrender.com";
 
 const api = axios.create({
   baseURL,
