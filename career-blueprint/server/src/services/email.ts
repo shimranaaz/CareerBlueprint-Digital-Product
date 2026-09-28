@@ -36,7 +36,7 @@ export const sendKitEmail = async (
       to: toEmail,
       subject: "Your Career Blueprint Job Search Kit is ready 🎉",
           html: `
-        <div style="font-family: sans-serif; line-height: 1.6; color: #095859;">
+      <div style="font-family: sans-serif; line-height: 1.6; color: #ffffff; background-color: #095859; padding: 24px; border-radius: 8px;">
           <p>Hi ${toName},</p>
           <p>Thank you for purchasing the <strong>Career Blueprint — Job Search Kit</strong>!</p>
           <p>Your kit includes:</p>
