@@ -10,6 +10,8 @@ import webhooksRouter from "./routes/webhooks";
 import adminRouter from "./routes/admin";
 
 const app = express();
+app.set("trust proxy", 1);
+
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || "")
   .split(",")
   .map((o) => o.trim().replace(/\/$/, ""))
