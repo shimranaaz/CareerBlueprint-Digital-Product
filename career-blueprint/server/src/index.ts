@@ -12,10 +12,18 @@ import adminRouter from "./routes/admin";
 const app = express();
 app.set("trust proxy", 1);
 
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || "")
+// Always allow the production domains, plus anything set in Render env vars
+const defaultOrigins = [
+  "https://careerblueprint.co.in",
+  "https://www.careerblueprint.co.in",
+];
+
+const envOrigins = (process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || "")
   .split(",")
   .map((o) => o.trim().replace(/\/$/, ""))
   .filter(Boolean);
+
+const allowedOrigins = Array.from(new Set([...defaultOrigins, ...envOrigins]));
 
 app.use(
   cors({
@@ -24,7 +32,8 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
-      return callback(new Error("Not allowed by CORS"));
+      console.warn("Blocked by CORS:", origin);
+      return callback(null, false);
     },
     credentials: true,
   })

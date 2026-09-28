@@ -22,7 +22,6 @@ function Landing() {
     <div className="min-h-screen bg-white">
       <Header />
       <Hero />
-      <VideoDemo />
       <Problem />
       <WhatsInside />
       <PromptDemo />
@@ -30,6 +29,7 @@ function Landing() {
       <PlatformTabs />
       <InterviewPrep />
       <Timeline />
+      <VideoDemo />
       <ChallengeGrid />
       <WhoForCards />
       <ValueStack />
