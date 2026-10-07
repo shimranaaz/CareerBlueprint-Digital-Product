@@ -1,24 +1,30 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 
 const testimonials = [
   {
-    image: "/priya.jpg",
-    name: "Priya S.",
     tag: "Fresher",
-    quote: "Got my first interview call within 2 weeks of using the prompts and resume template. Really helpful.",
+    quote:
+      "I was applying for jobs every day but hardly getting any responses. The resume template and LinkedIn tips helped me improve my profile and apply in a better way. Within a week, I started getting more responses from recruiters.",
+    author: "B.Com Graduate, Fresher",
   },
   {
-    image: "/arjun.jpg",
-    name: "Arjun K.",
-    tag: "3+ Years Exp.",
-    quote: "The LinkedIn and Naukri optimization guide helped me get noticed by recruiters. Highly recommend!",
+    tag: "Career Switcher",
+    quote:
+      "Honestly, I wasn't sure about buying it because it was only ₹99. But the job-search prompts were actually useful. Instead of spending hours figuring out what to ask ChatGPT, I could just use the prompts and get started quickly.",
+    author: "2 Years Experience, Career Switcher",
   },
   {
-    image: "/sneha.jpg",
-    name: "Sneha R.",
-    tag: "Job Seeker",
-    quote: "The interview preparation section was a game changer. I felt confident and well prepared.",
+    tag: "Experienced Job Seeker",
+    quote:
+      "The interview preparation section was the most useful for me. I went through it before my interviews and it helped me understand what I should prepare and how to answer better. I felt much more confident going into the interviews.",
+    author: "Experienced Professional",
+  },
+  {
+    tag: "Mid-Level Professional",
+    quote:
+      "I had already tried a few free resume templates, but I was still not getting shortlisted. This helped me improve my resume structure, keywords and LinkedIn profile. It was simple to use and gave me a much better idea of how to present my experience.",
+    author: "Mid-Level Professional",
   },
 ];
 
@@ -36,26 +42,42 @@ function Testimonials() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
+        {/* Mobile: horizontal scroll | md+: 2-column grid */}
+        <div
+          className="
+            flex gap-4 overflow-x-auto snap-x snap-mandatory
+            -mx-4 px-4 pb-2
+            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+            md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:snap-none
+          "
+        >
           {testimonials.map((t) => (
-            <div key={t.name} className="bg-[#F5F8F8] rounded-2xl p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <img
-                  src={t.image}
-                  alt=""
-                  className="w-11 h-11 rounded-full object-cover bg-[#095859]/10"
+            <div
+              key={t.tag}
+              className="
+                bg-[#F5F8F8] rounded-2xl p-6 flex flex-col
+                shrink-0 w-[85%] sm:w-[60%] snap-start
+                md:w-auto md:shrink
+              "
+            >
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-semibold text-[#095859] bg-[#095859]/10 px-3 py-1 rounded-full">
+                  {t.tag}
+                </span>
+                <FontAwesomeIcon
+                  icon={faQuoteLeft}
+                  className="text-[#095859]/20 text-xl"
                 />
-                <div>
-                  <p className="font-semibold text-[#095859] text-sm">{t.name}</p>
-                  <p className="text-xs text-[#5C6B6B]">{t.tag}</p>
-                </div>
               </div>
-              <div className="flex gap-1 mb-3">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <FontAwesomeIcon key={i} icon={faStar} className="text-[#F5C400] text-xs" />
-                ))}
+
+              <p className="text-sm text-[#5C6B6B] leading-relaxed mb-5 flex-1">
+                {t.quote}
+              </p>
+
+              <div className="flex items-center gap-2 border-t border-[#095859]/10 pt-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F5C400] shrink-0" />
+                <p className="text-sm font-semibold text-[#095859]">{t.author}</p>
               </div>
-              <p className="text-sm text-[#5C6B6B] leading-relaxed">{t.quote}</p>
             </div>
           ))}
         </div>

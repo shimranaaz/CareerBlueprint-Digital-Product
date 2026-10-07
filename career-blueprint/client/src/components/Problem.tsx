@@ -45,11 +45,23 @@ function Problem() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        {/* Mobile: horizontal scroll | md+: 4-column grid */}
+        <div
+          className="
+            flex gap-4 mb-8 overflow-x-auto snap-x snap-mandatory
+            -mx-4 px-4 pb-3
+            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+            md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-4 md:overflow-visible md:snap-none
+          "
+        >
           {problems.map((p) => (
             <div
               key={p.title}
-              className="bg-[#F5F8F8] rounded-2xl p-5 border-l-4 border-[#D65C4A]"
+              className="
+                bg-[#F5F8F8] rounded-2xl p-5 border-l-4 border-[#D65C4A]
+                shrink-0 w-[75%] sm:w-[45%] snap-start
+                md:w-auto md:shrink
+              "
             >
               <div className="flex items-start justify-between mb-3">
                 <FontAwesomeIcon
@@ -71,7 +83,7 @@ function Problem() {
           <p className="text-white text-lg md:text-xl font-semibold">
             We built one simple kit to fix all four.
           </p>
-                 <Link
+          <Link
             to="/checkout"
             className="bg-[#F5C400] text-[#095859] font-bold px-6 py-3 rounded-lg whitespace-nowrap hover:brightness-95 transition inline-flex items-center gap-2"
           >

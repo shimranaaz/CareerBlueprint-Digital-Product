@@ -42,11 +42,23 @@ function WhoForCards() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4">
+        {/* Mobile: horizontal scroll | md+: 2-column grid */}
+        <div
+          className="
+            flex gap-4 overflow-x-auto snap-x snap-mandatory
+            -mx-4 px-4 pb-2
+            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+            md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 md:overflow-visible md:snap-none
+          "
+        >
           {audiences.map((a) => (
             <div
               key={a.title}
-              className="bg-[#F5F8F8] rounded-2xl p-6 flex items-start gap-4"
+              className="
+                bg-[#F5F8F8] rounded-2xl p-6 flex items-start gap-4
+                shrink-0 w-[80%] sm:w-[48%] snap-start
+                md:w-auto md:shrink
+              "
             >
               <div className="w-11 h-11 rounded-xl bg-[#095859]/10 flex items-center justify-center shrink-0">
                 <FontAwesomeIcon icon={a.icon} className="text-[#095859] text-lg" />

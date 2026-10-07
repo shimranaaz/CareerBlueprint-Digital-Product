@@ -32,6 +32,7 @@ const products = [
     anchor: "#interview-prep",
   },
 ];
+
 function WhatsInside() {
   return (
     <section id="whats-inside" className="bg-[#F5F8F8] py-16 px-4 md:px-8">
@@ -45,13 +46,25 @@ function WhatsInside() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Mobile: horizontal scroll | md+: 4-column grid */}
+        <div
+          className="
+            flex gap-4 overflow-x-auto snap-x snap-mandatory
+            -mx-4 px-4 pb-4
+            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+            md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-4 md:overflow-visible md:snap-none
+          "
+        >
           {products.map((p) => (
             <div
               key={p.title}
-              className="bg-white rounded-2xl p-6 shadow-sm flex flex-col"
+              className="
+                bg-white rounded-2xl p-6 shadow-sm flex flex-col
+                shrink-0 w-[78%] sm:w-[45%] snap-start
+                md:w-auto md:shrink
+              "
             >
-                          <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 bg-[#095859]/10">
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 bg-[#095859]/10">
                 <FontAwesomeIcon icon={p.icon} className="text-lg text-[#095859]" />
               </div>
               <h3 className="font-semibold text-[#095859] mb-2 leading-snug">
@@ -60,8 +73,8 @@ function WhatsInside() {
               <p className="text-sm text-[#5C6B6B] mb-5 flex-1">
                 {p.description}
               </p>
-              
-                <a href={p.anchor}
+              <a
+                href={p.anchor}
                 className="bg-[#095859] text-white text-sm font-semibold text-center py-2.5 rounded-lg hover:bg-[#0a6b6c] transition-colors"
               >
                 {p.linkLabel}

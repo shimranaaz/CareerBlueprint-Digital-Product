@@ -28,7 +28,7 @@ function StickyBar() {
 
       <div className="flex items-center gap-3 shrink-0">
         <div className="flex flex-col items-end leading-none">
-          <span className="text-xs text-[#5C6B6B] line-through">₹399</span>
+          <span className="text-xs text-[#5C6B6B] line-through">₹895+</span>
           <span className="text-lg font-bold text-[#095859]">₹99</span>
         </div>
         <Link
