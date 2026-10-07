@@ -49,7 +49,7 @@ function Hero() {
 
           <div className="flex items-center gap-3">
             <span className="text-3xl font-bold">₹99</span>
-            <span className="text-white/50 line-through text-lg">₹499</span>
+            <span className="text-white/50 line-through text-lg">₹895</span>
             <span className="relative bg-[#F5C400] text-[#095859] text-xs font-bold px-3 py-1.5 rounded-full -rotate-6 shadow-sm">
               Launch Offer
             </span>

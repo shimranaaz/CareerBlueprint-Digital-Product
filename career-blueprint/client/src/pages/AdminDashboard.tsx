@@ -31,16 +31,16 @@ function AdminDashboard() {
   const navigate = useNavigate();
   const [orders, setOrders] = useState<Order[]>([]);
   const [summary, setSummary] = useState<Summary | null>(null);
+  const [visits, setVisits] = useState<number>(0);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
   const [authChecked, setAuthChecked] = useState(false);
   const [resendingId, setResendingId] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<Order | null>(null);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-
-   const fetchOrders = useCallback(async () => {
+  const fetchOrders = useCallback(async () => {
     setLoading(true);
     try {
       const { data } = await api.get("/api/admin/orders", {
@@ -57,12 +57,22 @@ function AdminDashboard() {
     }
   }, [search, status, navigate]);
 
+  const fetchVisits = useCallback(async () => {
+    try {
+      const { data } = await api.get("/api/admin/visits");
+      setVisits(data.count);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
         await api.get("/api/admin/me");
         setAuthChecked(true);
         fetchOrders();
+        fetchVisits();
       } catch {
         navigate("/admin/login");
       }
@@ -70,6 +80,7 @@ function AdminDashboard() {
     checkAuth();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handleResend = async (orderId: string) => {
     setResendingId(orderId);
     try {
@@ -133,7 +144,11 @@ function AdminDashboard() {
 
       <div className="max-w-6xl mx-auto px-6 py-6">
         {summary && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+            <div className="bg-white rounded-xl p-5 border border-gray-100">
+              <p className="text-xs text-[#5C6B6B] mb-1">Total Visits</p>
+              <p className="text-2xl font-bold text-[#095859]">{visits}</p>
+            </div>
             <div className="bg-white rounded-xl p-5 border border-gray-100">
               <p className="text-xs text-[#5C6B6B] mb-1">Total Orders</p>
               <p className="text-2xl font-bold text-[#095859]">{summary.totalOrders}</p>

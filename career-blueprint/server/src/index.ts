@@ -8,6 +8,7 @@ import { connectDB } from "./config/db";
 import ordersRouter from "./routes/orders";
 import webhooksRouter from "./routes/webhooks";
 import adminRouter from "./routes/admin";
+import visitsRouter from "./routes/visits";
 
 const app = express();
 app.set("trust proxy", 1);
@@ -39,6 +40,7 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use(visitsRouter);
 
 app.use(
   "/api/webhooks",
