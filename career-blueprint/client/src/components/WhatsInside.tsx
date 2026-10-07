@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileLines, faWandMagicSparkles, faComments } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import AutoScrollRow from "./AutoScrollRow";
 
 const products = [
   {
@@ -35,9 +36,9 @@ const products = [
 
 function WhatsInside() {
   return (
-    <section id="whats-inside" className="bg-[#F5F8F8] py-16 px-4 md:px-8">
+    <section id="whats-inside" className="bg-[#F5F8F8] py-8 md:py-16 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
+        <div className="text-center mb-6 md:mb-10">
           <h2 className="text-2xl md:text-3xl font-bold text-[#095859] mb-2">
             What's Inside The Job Search Kit?
           </h2>
@@ -46,15 +47,8 @@ function WhatsInside() {
           </p>
         </div>
 
-        {/* Mobile: horizontal scroll | md+: 4-column grid */}
-        <div
-          className="
-            flex gap-4 overflow-x-auto snap-x snap-mandatory
-            -mx-4 px-4 pb-4
-            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-            md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-4 md:overflow-visible md:snap-none
-          "
-        >
+        {/* Mobile: auto-scrolling row | md+: 4-column grid */}
+        <AutoScrollRow className="md:grid md:grid-cols-4">
           {products.map((p) => (
             <div
               key={p.title}
@@ -81,7 +75,7 @@ function WhatsInside() {
               </a>
             </div>
           ))}
-        </div>
+        </AutoScrollRow>
       </div>
     </section>
   );

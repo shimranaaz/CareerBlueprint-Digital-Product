@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
+import AutoScrollRow from "./AutoScrollRow";
 
 const testimonials = [
   {
@@ -30,9 +31,9 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section id="testimonials" className="bg-white py-16 px-4 md:px-8">
+    <section id="testimonials" className="bg-white py-8 md:py-16 px-4 md:px-8">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-10">
+        <div className="text-center mb-6 md:mb-10">
           <h2 className="text-2xl md:text-3xl font-bold text-[#095859] mb-2">
             What Our Users Say
           </h2>
@@ -42,14 +43,10 @@ function Testimonials() {
           </p>
         </div>
 
-        {/* Mobile: horizontal scroll | md+: 2-column grid */}
-        <div
-          className="
-            flex gap-4 overflow-x-auto snap-x snap-mandatory
-            -mx-4 px-4 pb-2
-            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-            md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:snap-none
-          "
+        {/* Mobile: auto-scrolling row | md+: 2-column grid */}
+        <AutoScrollRow
+          className="md:grid md:grid-cols-2 md:gap-5"
+          interval={2400}
         >
           {testimonials.map((t) => (
             <div
@@ -80,7 +77,7 @@ function Testimonials() {
               </div>
             </div>
           ))}
-        </div>
+        </AutoScrollRow>
       </div>
     </section>
   );

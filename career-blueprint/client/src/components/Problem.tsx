@@ -8,6 +8,7 @@ import {
   faXmark,
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
+import AutoScrollRow from "./AutoScrollRow";
 
 const problems = [
   {
@@ -34,9 +35,9 @@ const problems = [
 
 function Problem() {
   return (
-    <section className="bg-white py-16 px-4 md:px-8">
+    <section className="bg-white py-8 md:py-16 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
+        <div className="text-center mb-6 md:mb-10">
           <h2 className="text-2xl md:text-3xl font-bold text-[#095859] mb-2">
             Why Are You Not Getting Enough Interview Calls?
           </h2>
@@ -45,15 +46,8 @@ function Problem() {
           </p>
         </div>
 
-        {/* Mobile: horizontal scroll | md+: 4-column grid */}
-        <div
-          className="
-            flex gap-4 mb-8 overflow-x-auto snap-x snap-mandatory
-            -mx-4 px-4 pb-3
-            [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-            md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-4 md:overflow-visible md:snap-none
-          "
-        >
+        {/* Mobile: auto-scrolling row | md+: 4-column grid */}
+        <AutoScrollRow className="md:grid md:grid-cols-4 mb-6 md:mb-8">
           {problems.map((p) => (
             <div
               key={p.title}
@@ -77,7 +71,7 @@ function Problem() {
               <p className="text-sm text-[#5C6B6B]">{p.detail}</p>
             </div>
           ))}
-        </div>
+        </AutoScrollRow>
 
         <div className="bg-[#095859] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <p className="text-white text-lg md:text-xl font-semibold">
